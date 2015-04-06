@@ -3,7 +3,7 @@
 #include <cstring>
 #include <cstdlib>
 
-#include "tinyxml2.h"
+#include "tinyxml2/tinyxml2.h"
 
 using namespace std;
 using namespace tinyxml2;
@@ -61,9 +61,8 @@ bool equalMMSes( const XMLElement * mms1, const XMLElement * mms2 )
 
 int main( void )
 {
-    // TODO: update count
     XMLDocument doc;
-    doc.LoadFile( "big_sms.xml" );
+    doc.LoadFile( "small_sms.xml" );
 
     XMLNode * smses = doc.FirstChildElement( "smses" );
     if ( !smses ) return 0;

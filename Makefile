@@ -1,5 +1,5 @@
 all:
-	g++ -Wall -DDEBUG tinyxml2.cpp find_dupes.cpp -o find_dupes
+	g++ -Wall -Wextra -DDEBUG tinyxml2/tinyxml2.cpp find_dupes.cpp -o dupe_buster
 
 clean:
-	rm -f *.o find_dupes
+	rm -f *.o dupe_buster
