@@ -13,7 +13,7 @@ This project is still a **work in progress**, so please do not expect too much o
 * Not tested with more than 1 duplicate message
 
 # License
-Dupe Buster is licensed under the Unlicense:
+Dupe Buster is licensed under **the Unlicense**:
 
 > This is free and unencumbered software released into the public domain.
 
