@@ -59,8 +59,20 @@ bool equalMMSes( const XMLElement * mms1, const XMLElement * mms2 )
         && !strcmp( mms1->Attribute("tr_id"), mms2->Attribute("tr_id") );
 }
 
-int main( void )
+int main( int argc, char** argv )
 {
+    if ( argc != 2 )
+    {
+        cout << "Incorrect syntax. Here is the proper way to call Dupe Buster:" << endl;
+        cout << "    dupe_buster <source filename> <target filename>" << endl << endl;
+        return 0;
+    }
+
+    const char* srcname = argv[0];
+    const char* tgtname = argv[1];
+    cout << sourcename << " to " << tgtname << endl;
+    return 0;
+
     XMLDocument doc;
     doc.LoadFile( "small_sms.xml" );
 
