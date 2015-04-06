@@ -8,11 +8,16 @@ The goal of Dupe Buster is to provide a minimal-impact solution for deleting dup
 
 This project is still a **work in progress**, so please do not expect too much of it :)
 
+## Features
+* Identifies duplicates in a SMS Backup&amp;Restore XML backup file and deletes them
+* SMS and MMS support
+
 ## Potential issues
 * Requires duplicates to be positioned one after another in the backup files
-* Code written in "quick and dirty" mode
-* International prefixes not handled (yet)
-* Input and output file names are hard-coded
+* Special characters and emoji support is *unknown*
+* Quick and dirty code
+* International prefixes not handled (French prefix only, hard-coded)
+* TinyXML2's XML auto-formatting when writing may cause issues in MMS in some cases (needs further testing)
 
 # License
 Dupe Buster is licensed under **the Unlicense**:
