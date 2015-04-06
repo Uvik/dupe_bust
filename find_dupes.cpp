@@ -1,5 +1,7 @@
 #include <iostream>
+#include <sstream>
 #include <cstring>
+#include <cstdlib>
 
 #include "tinyxml2.h"
 
@@ -59,11 +61,15 @@ bool equalMMSes( const XMLElement * mms1, const XMLElement * mms2 )
 
 int main( void )
 {
+    // TODO: update count
     XMLDocument doc;
-    doc.LoadFile( "small_sms.xml" );
+    doc.LoadFile( "big_sms.xml" );
 
     XMLNode * smses = doc.FirstChildElement( "smses" );
     if ( !smses ) return 0;
+
+    int msgCount = smses->ToElement()->IntAttribute("count");
+    int dupeCount = 0;
 
     // SMS
     XMLNode * curSMS = smses->FirstChildElement( "sms" );
@@ -71,8 +77,11 @@ int main( void )
     {
         XMLNode * nextSMS = curSMS->NextSiblingElement("sms");
         if ( nextSMS != NULL && equalSMSes( curSMS->ToElement(), nextSMS->ToElement() ) )
+        {
             smses->DeleteChild( nextSMS );
-
+            --msgCount;
+            ++dupeCount;
+        }
         curSMS = curSMS->NextSiblingElement("sms");
     } while ( curSMS != NULL );
 
@@ -82,10 +91,23 @@ int main( void )
     {
         XMLNode * nextMMS = curMMS->NextSiblingElement("mms");
         if ( nextMMS != NULL && equalMMSes( curMMS->ToElement(), nextMMS->ToElement() ) )
+        {
             smses->DeleteChild( nextMMS );
+            --msgCount;
+            ++dupeCount;
+        }
 
         curMMS = curMMS->NextSiblingElement("sms");
     } while ( curMMS != NULL );
+
+    // Update message count
+    string newCountStr;
+    stringstream countSStream;
+    countSStream << msgCount;
+    newCountStr = countSStream.str();
+    smses->ToElement()->SetAttribute("count", newCountStr.c_str());
+
+    cout << "Successfully deleted " << dupeCount << " duplicates." << endl;
 
     doc.SaveFile("new.xml");
 
