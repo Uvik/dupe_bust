@@ -1,6 +1,6 @@
 # About Dupe Buster
 Dupe Buster is a small C++ project to delete duplicate messages (SMS or MMS) from a SMS Backup&amp;Restore backup.
-It uses Lee Thomason's [TinyXML2](http://www.grinninglizard.com/tinyxml2/) for XML parsing.
+It uses Lee Thomason's [TinyXML2](http://www.grinninglizard.com/tinyxml2/) to parse SMS B&amp;R's XML save files.
 
 For most needs, SMS Backup&amp;Restore is a great Android app. However, it doesn't always deal well with duplicate messages, and deleting them by hand is not always an option.
 
