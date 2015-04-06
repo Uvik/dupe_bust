@@ -75,11 +75,12 @@ int main( void )
     do
     {
         XMLNode * nextSMS = curSMS->NextSiblingElement("sms");
-        if ( nextSMS != NULL && equalSMSes( curSMS->ToElement(), nextSMS->ToElement() ) )
+        while ( nextSMS != NULL && equalSMSes( curSMS->ToElement(), nextSMS->ToElement() ) )
         {
             smses->DeleteChild( nextSMS );
             --msgCount;
             ++dupeCount;
+            nextSMS = curSMS->NextSiblingElement("sms");
         }
         curSMS = curSMS->NextSiblingElement("sms");
     } while ( curSMS != NULL );
@@ -89,11 +90,12 @@ int main( void )
     do
     {
         XMLNode * nextMMS = curMMS->NextSiblingElement("mms");
-        if ( nextMMS != NULL && equalMMSes( curMMS->ToElement(), nextMMS->ToElement() ) )
+        while ( nextMMS != NULL && equalMMSes( curMMS->ToElement(), nextMMS->ToElement() ) )
         {
             smses->DeleteChild( nextMMS );
             --msgCount;
             ++dupeCount;
+            nextMMS = curMMS->NextSiblingElement("mms");
         }
 
         curMMS = curMMS->NextSiblingElement("sms");

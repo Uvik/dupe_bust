@@ -10,7 +10,9 @@ This project is still a **work in progress**, so please do not expect too much o
 
 ## Potential issues
 * Requires duplicates to be positioned one after another in the backup files
-* Not tested with more than 1 duplicate message
+* Code written in "quick and dirty" mode
+* International prefixes not handled (yet)
+* Input and output file names are hard-coded
 
 # License
 Dupe Buster is licensed under **the Unlicense**:
