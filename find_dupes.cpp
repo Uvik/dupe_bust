@@ -42,14 +42,19 @@ bool equalNumbers( const char* str1, const char* str2 )
 bool equalSMSes( const XMLElement * sms1, const XMLElement * sms2 )
 {
     return equalNumbers( sms1->Attribute("address"), sms2->Attribute("address") )
-        || !strcmp( sms1->Attribute("date"), sms2->Attribute("date") )
-        || !strcmp( sms1->Attribute("type"), sms2->Attribute("type") )
-        || !strcmp( sms1->Attribute("body"), sms2->Attribute("body") );
+        && !strcmp( sms1->Attribute("date"), sms2->Attribute("date") )
+        && !strcmp( sms1->Attribute("type"), sms2->Attribute("type") )
+        && !strcmp( sms1->Attribute("body"), sms2->Attribute("body") );
 }
 
 bool equalMMSes( const XMLElement * mms1, const XMLElement * mms2 )
 {
-    return false;
+    return equalNumbers( mms1->Attribute("address"), mms2->Attribute("address") )
+        && !strcmp( mms1->Attribute("date"), mms2->Attribute("date") )
+        && !strcmp( mms1->Attribute("ct_t"), mms2->Attribute("ct_t") )
+        && !strcmp( mms1->Attribute("sub"), mms2->Attribute("sub") )
+        && !strcmp( mms1->Attribute("m_id"), mms2->Attribute("m_id") )
+        && !strcmp( mms1->Attribute("tr_id"), mms2->Attribute("tr_id") );
 }
 
 int main( void )
@@ -57,12 +62,10 @@ int main( void )
     XMLDocument doc;
     doc.LoadFile( "small_sms.xml" );
 
-    int MAX_COUNT = 8;
-    int i = 0;
-
     XMLNode * smses = doc.FirstChildElement( "smses" );
     if ( !smses ) return 0;
 
+    // SMS
     XMLNode * curSMS = smses->FirstChildElement( "sms" );
     do
     {
@@ -71,11 +74,18 @@ int main( void )
             smses->DeleteChild( nextSMS );
 
         curSMS = curSMS->NextSiblingElement("sms");
-    } while ( i < MAX_COUNT && curSMS != NULL );
+    } while ( curSMS != NULL );
 
+    // MMS
+    XMLNode * curMMS = smses->FirstChildElement( "mms" );
+    do
+    {
+        XMLNode * nextMMS = curMMS->NextSiblingElement("mms");
+        if ( nextMMS != NULL && equalMMSes( curMMS->ToElement(), nextMMS->ToElement() ) )
+            smses->DeleteChild( nextMMS );
 
-    //const XMLNode * nextSMS = curSMS->NextSiblingElement("sms");
-    //cout << nextSMS->ToElement()->Attribute("address") << endl;
+        curMMS = curMMS->NextSiblingElement("sms");
+    } while ( curMMS != NULL );
 
     doc.SaveFile("new.xml");
 
