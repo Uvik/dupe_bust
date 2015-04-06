@@ -1,7 +1,16 @@
-# About this project
+# About Dupe Buster
 Dupe Buster is a small C++ project to delete duplicate messages (SMS or MMS) from a SMS Backup&amp;Restore backup.
-It uses Lee Thomason's TinyXML2 library for XML parsing.
-This project is still a **work in progress** (and incidentally, my first Github project :) )
+It uses Lee Thomason's [TinyXML2](http://www.grinninglizard.com/tinyxml2/) for XML parsing.
+
+For most needs, SMS Backup&amp;Restore is a great Android app. However, it doesn't always deal well with duplicate messages, and deleting them by hand is not always an option.
+
+The goal of Dupe Buster is to provide a minimal-impact solution for deleting duplicates in your file without busting your whole backup.
+
+This project is still a **work in progress**, so please do not expect too much of it :)
+
+## Potential issues
+* Requires duplicates to be positioned one after another in the backup files
+* Not tested with more than 1 duplicate message
 
 # License
 Dupe Buster is licensed under the Unlicense:
@@ -29,4 +38,6 @@ Dupe Buster is licensed under the Unlicense:
 > ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 > OTHER DEALINGS IN THE SOFTWARE.
 
-For more information, please refer to <http://unlicense.org/>
+> For more information, please refer to <http://unlicense.org/>
+
+Long story short, you can do anything you want with this small piece of code. Of course, any form of credit would be appreciated, but do not feel obliged to do so :)
